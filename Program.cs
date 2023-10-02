@@ -10,19 +10,7 @@ namespace Employee
     {
         static void Main(string[] args)
         {
-            var persons = new List<Person>();
-            using StreamReader sr = new StreamReader(
-                path:@"..\..\..\src\Person.txt",
-                Encoding.UTF8
-                );
 
-            while (!sr.EndOfStream)
-            {
-                persons.Add(new Person(sr.ReadLine()));
-                _ = sr.ReadLine();
-            }
-
-            Console.WriteLine(persons.Count());
 
 
             //Készíts egy osztályt, amely tartalmazza a szükséges mezőket. Nem kötelező kidolgozni a property - ket.

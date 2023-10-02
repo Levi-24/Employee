@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Employee
@@ -29,6 +30,21 @@ namespace Employee
             this.Gender = Pieces[5] == "Male";
             this.MaritalStatus = Pieces[6] == "Married";
             this.Salary = int.Parse(Pieces[7]);
+        }
+
+        public virtual void Print()
+        {
+            var persons = new List<Person>();
+            using StreamReader sr = new StreamReader(
+                path: @"..\..\..\src\Person.txt",
+                Encoding.UTF8
+                );
+
+            while (!sr.EndOfStream)
+            {
+                persons.Add(new Person(sr.ReadLine()));
+                _ = sr.ReadLine();
+            }
         }
     }
 }
