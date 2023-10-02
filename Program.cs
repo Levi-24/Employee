@@ -10,20 +10,35 @@ namespace Employee
     {
         static void Main(string[] args)
         {
+            var persons = new List<Person>();
+            using StreamReader sr = new StreamReader(
+                path: @"..\..\..\src\Person.txt",
+                Encoding.UTF8
+                );
+            while (!sr.EndOfStream)
+            {
+                persons.Add(new Person(sr.ReadLine()));
+                _ = sr.ReadLine();
+            }
 
+            //int i = 0;
+            //foreach (var person in persons)
+            //{
+            //    person.Print(i, persons);
+            //    i++;
+            //}
 
+            Console.WriteLine($"1.Feladat: {Math.Round(AverageAge(persons),2)}");
+            Console.WriteLine($"2.Feladat: {CityCount(persons)}");
 
             //Készíts egy osztályt, amely tartalmazza a szükséges mezőket. Nem kötelező kidolgozni a property - ket.
             //Írd meg a konstruktort.
             //Készíts egy osztályon belüli virtuális metódust az adatok kiírására.
-            //Propertyk kidolgozása(Szorgalmi feladat)
             //Dolgozd ki a property-ket is, és használd őket az adatokhoz való korrekt hozzáférésre és módosításra.
-            //Hibakezelés(Szorgalmi feladat)
             //Implementálj hibakezelést az alkalmazásban, például az adatok beolvasásakor vagy a fájlba írás során.
             //Az osztály segítségével hozz létre egy listát, amely objektumpéldányokat tartalmaz a forrásfájlból beolvasott adatokkal.
             //A virtuális metódus segítségével írd ki az összes adatot.
 
-            //A következő feladatokat a program osztályban elhelyezett statikus metódusokkal oldd meg. (Aki szeret kísérletezni, teheti ezeket a metódusokat egy újabb osztályba.) Egyes feladatokat meg lehet oldani LINQ-val is, de ha belefér az időbe, kódoljátok le hagyományosan is.Ha van olyan feladat, ami nem egyértelmű, pl.az, hogyan kell kiírni, ott rád van bízva a megoldás.
             //Függvény segítségével írd ki az életkorok átlagát.
             //Függvény segítségével írd ki azon személyek számát, akiknek a városa 'Budapest'.
             //Függvény segítségével keresd ki, majd a virtuális metódus segítségével írd ki a legidősebb személy adatait.
@@ -35,6 +50,17 @@ namespace Employee
             //Írj egy függvényt, aminek a paramétere az eredeti adatokat tartalmazó listának megfelelő típusú. Ennek segítségével számold ki az összes alkalmazott átlagfizetését.
             //Készíts a főprogramban egy olyan listát, amiben csak a developer beosztásúak találhatók, minden tulajdonságukkal. Hívd meg újra a főprogramból az előző függvényt, de most ez az új lista legyen a paramétere. A főprogram írja ki a developerek átlagfizetését.
             //Számold ki a férfi és női alkalmazottak átlagfizetését tetszőleges módszerrel.
+        }
+        static double AverageAge(List<Person> persons)
+        {
+            double average = persons.Average(p => p.Age);
+            return average;
+        }
+
+        static int CityCount(List<Person> persons)
+        {
+            int count = persons.Count(p => p.City == "Budapest");
+            return count;
         }
     }
 }

@@ -32,19 +32,9 @@ namespace Employee
             this.Salary = int.Parse(Pieces[7]);
         }
 
-        public virtual void Print()
+        public virtual void Print(int i, List<Person> persons)
         {
-            var persons = new List<Person>();
-            using StreamReader sr = new StreamReader(
-                path: @"..\..\..\src\Person.txt",
-                Encoding.UTF8
-                );
-
-            while (!sr.EndOfStream)
-            {
-                persons.Add(new Person(sr.ReadLine()));
-                _ = sr.ReadLine();
-            }
+            Console.WriteLine(persons[i].Name);
         }
     }
 }
