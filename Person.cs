@@ -36,5 +36,16 @@ namespace Employee
         {
             Console.WriteLine(persons[i].Name);
         }
+
+        static Person FindOldest(List<Person> persons)
+        {
+            var oldest = persons.OrderBy(p => p.Age).Last();
+            return oldest;
+        }
+
+        public virtual void PrintOldest()
+        {
+
+        }
     }
 }
