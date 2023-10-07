@@ -44,15 +44,9 @@ namespace Employee
             Console.WriteLine($"{persons[i].Salary}; ");
         }
 
-        static Person FindOldest(List<Person> persons)
+        public virtual void PrintOldest(Person person)
         {
-            var oldest = persons.OrderBy(p => p.Age).Last();
-            return oldest;
-        }
-
-        public virtual void PrintOldest()
-        {
-
+            Console.WriteLine($"3.Feladat: {person.Name} {person.Age}");
         }
     }
 }
