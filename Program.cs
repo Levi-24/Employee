@@ -11,10 +11,10 @@ namespace Employee
         static void Main(string[] args)
         {
             var persons = new List<Person>();
+
             using StreamReader sr = new StreamReader(
-                path: @"..\..\..\src\Person.txt",
-                Encoding.UTF8
-                );
+                        path: @"..\..\..\src\Person.txt",
+                        Encoding.UTF8);
             while (!sr.EndOfStream)
             {
                 persons.Add(new Person(sr.ReadLine()));
@@ -76,7 +76,6 @@ namespace Employee
 
             Console.WriteLine($"10.Feladat: {AverageSalary(Developers)}");
 
-            //Implementálj hibakezelést az alkalmazásban, például az adatok beolvasásakor vagy a fájlba írás során.
             var xd = AverageGenderSalary(persons);
             Console.WriteLine($"11.Feladat: Male: {xd[0]}; \t Female: {xd[1]};");
         }
