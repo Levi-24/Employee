@@ -21,26 +21,21 @@ namespace Employee
                 _ = sr.ReadLine();
             }
 
-            //int i = 0;
-            //foreach (var person in persons)
-            //{
-            //    person.Print(i, persons);
-            //    i++;
-            //}
+            int i = 0;
+            foreach (var person in persons)
+            {
+                person.Print(i, persons);
+                i++;
+            }
 
+            Console.WriteLine("--------------------------------------------------------------------");
             Console.WriteLine($"1.Feladat: {Math.Round(AverageAge(persons),2)}");
             Console.WriteLine($"2.Feladat: {CityCount(persons)}");
 
-            //Készíts egy osztályt, amely tartalmazza a szükséges mezőket. Nem kötelező kidolgozni a property - ket.
-            //Írd meg a konstruktort.
-            //Készíts egy osztályon belüli virtuális metódust az adatok kiírására.
-            //Dolgozd ki a property-ket is, és használd őket az adatokhoz való korrekt hozzáférésre és módosításra.
             //Implementálj hibakezelést az alkalmazásban, például az adatok beolvasásakor vagy a fájlba írás során.
-            //Az osztály segítségével hozz létre egy listát, amely objektumpéldányokat tartalmaz a forrásfájlból beolvasott adatokkal.
             //A virtuális metódus segítségével írd ki az összes adatot.
 
-            //Függvény segítségével írd ki az életkorok átlagát.
-            //Függvény segítségével írd ki azon személyek számát, akiknek a városa 'Budapest'.
+
             //Függvény segítségével keresd ki, majd a virtuális metódus segítségével írd ki a legidősebb személy adatait.
             //Függvény segítségével döntsd el, majd a főprogramban írd ki, hogy van - e 50 év fölötti személy, és emellett írd ki a nevét is. (Ez a függvény tehát két értéket kell, hogy generáljon, ezt egyetlen szövegként add vissza a főprogramnak, és a főprogram bontsa szét az adatokat, majd utána írja ki.)
             //Függvénnyel válogasd ki azon személyek nevét egy új tömbbe(nem listába), akik 30 évnél fiatalabbak. Ennek a tömbnek a hasznos tartalmát írd ki a főprogramban.

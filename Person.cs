@@ -34,7 +34,14 @@ namespace Employee
 
         public virtual void Print(int i, List<Person> persons)
         {
-            Console.WriteLine(persons[i].Name);
+            Console.Write($"{persons[i].Name}; ");
+            Console.Write($"{persons[i].Age}; ");
+            Console.Write($"{persons[i].City}; ");
+            Console.Write($"{persons[i].Department}; ");
+            Console.Write($"{persons[i].Position}; ");
+            Console.Write($"{persons[i].Gender}; ");
+            Console.Write($"{persons[i].MaritalStatus}; ");
+            Console.WriteLine($"{persons[i].Salary}; ");
         }
 
         static Person FindOldest(List<Person> persons)
