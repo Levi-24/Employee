@@ -37,10 +37,16 @@ namespace Employee
                 if (persons[j] == oldest) oldest.PrintOldest(oldest);
             }
             Console.WriteLine($"4.Feladat: {Over50(persons)}");
+            Console.WriteLine("5.Feladat:");
+            foreach (var person in Under30(persons)) Console.WriteLine($"\t{person}");
+
+
+            Person youngest;
+            Person oldest2;
+            bool moreYoung = YoungestOldest(persons, out youngest, out oldest2);
+            Console.WriteLine($"6.Feladat: Legfiatalabb neve: {youngest.Name} \t Legidosebb neve: {oldest2.Name} \n\t Van több ugyanolyan korú legfiatalabb személy? {moreYoung}");
 
             //Implementálj hibakezelést az alkalmazásban, például az adatok beolvasásakor vagy a fájlba írás során.
-
-            //Függvénnyel válogasd ki azon személyek nevét egy új tömbbe(nem listába), akik 30 évnél fiatalabbak. Ennek a tömbnek a hasznos tartalmát írd ki a főprogramban.
 
 
             //Egyetlen függvénnyel keresd meg a legfiatalabb és a legidősebb személyt.
@@ -89,6 +95,35 @@ namespace Employee
             else return "Nincsen 50 év feletti alkalmazott.";
         }
 
+        static string[] Under30(List<Person> persons)
+        {
+            int arraySize = persons.Count(p => p.Age < 30);
+            string[] under30names = new string[arraySize];
 
+            var under30 = persons.Where(p => p.Age < 30);
+            int i = 0;
+            foreach (var person in under30)
+            {
+                under30names[i] = person.Name;
+                i++;
+            }
+
+            return under30names;
+        }
+
+        static bool YoungestOldest(List<Person> persons, out Person youngest, out Person oldest)
+        {
+            youngest = persons.OrderBy(p => p.Age).First();
+            oldest = persons.OrderBy(p => p.Age).Last();
+
+            var youngestCopy = persons.OrderBy(p => p.Age).First();
+
+            int i = 0;
+            foreach (var person in persons) if (person.Age == youngestCopy.Age) i++;
+
+            bool moreYoung = false;
+            if (i > 1) moreYoung = true;
+            return moreYoung;
+        }
     }
 }
