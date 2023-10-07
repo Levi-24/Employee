@@ -39,31 +39,46 @@ namespace Employee
             Console.WriteLine($"4.Feladat: {Over50(persons)}");
             Console.WriteLine("5.Feladat:");
             foreach (var person in Under30(persons)) Console.WriteLine($"\t{person}");
-
-
             Person youngest;
             Person oldest2;
             bool moreYoung = YoungestOldest(persons, out youngest, out oldest2);
             Console.WriteLine($"6.Feladat: Legfiatalabb neve: {youngest.Name} \t Legidosebb neve: {oldest2.Name} \n\t Van több ugyanolyan korú legfiatalabb személy? {moreYoung}");
+            Console.WriteLine($"7.Feladat:");
+            var yearlyHufList = new List<int>();
+            foreach (var person in persons) 
+            {
+                Console.WriteLine(YearlyHuf(person));
+                yearlyHufList.Add(YearlyHuf(person));
+            }
+            Console.WriteLine($"8.Feladat: Kiirva");
+            Dictionary<string, int> keyValuePairs = Over12Million(persons,yearlyHufList);
+
+            using StreamWriter writer = new StreamWriter(
+                path: @"..\..\..\src\12_000_000_Salary",
+                append: false,
+                Encoding.UTF8
+                );
+            foreach (var kvp in keyValuePairs)
+            {
+                writer.WriteLine($"\tNév: {kvp.Key} \tÉves fizetés: {kvp.Value}");
+            }
+
+            Console.WriteLine($"9.Feladat: Az átlagfizetés 2. tizedesjegyre kerekitve: {Math.Round(AverageSalary(persons),2)}");
+
+            var Developers = new List<Person>();
+            foreach (var person in persons)
+            {
+                if (person.Position == "Developer")
+                {
+                    Developers.Add(new Person(person));
+                }
+            }
+
+            Console.WriteLine($"10.Feladat: {AverageSalary(Developers)}");
 
             //Implementálj hibakezelést az alkalmazásban, például az adatok beolvasásakor vagy a fájlba írás során.
-
-
-            //Egyetlen függvénnyel keresd meg a legfiatalabb és a legidősebb személyt.
-            //A függvénynek legyen két olyan paramétere, amiben az eredményt vissza lehet juttatni a főprogramba, és ott ki lehet írni a nevüket és a korukat.
-            //A függvény visszatérési értéke pedig képes legyen azt jelezni, hogy van-e több ugyanolyan korú legfiatalabb személy.
-
-            //Készíts egy függvényt, ami átszámolja az euróban megadott havi fizetést éves fizetéssé, és az eredményt még váltsd át magyar forintba is.
-
-            //Készíts egy függvényt, amelynek visszatérési értéke egy szótár, amelyben szerepel a 12 millió forint éves fizetés feletti munkavállalók neve és az éves fizetésük forintban.
-            //(Az átszámításhoz használd az előző feladat függvényét.)  Az elkészült szótárt a főprogram írja ki egy új fájlba.
-
-            //Írj egy függvényt, aminek a paramétere az eredeti adatokat tartalmazó listának megfelelő típusú. Ennek segítségével számold ki az összes alkalmazott átlagfizetését.
-
-            //Készíts a főprogramban egy olyan listát, amiben csak a developer beosztásúak találhatók, minden tulajdonságukkal.
-            //Hívd meg újra a főprogramból az előző függvényt, de most ez az új lista legyen a paramétere. A főprogram írja ki a developerek átlagfizetését.
-
-            //Számold ki a férfi és női alkalmazottak átlagfizetését tetszőleges módszerrel.
+            var xd = AverageGenderSalary(persons);
+            Console.WriteLine($"11.Feladat: Male: {xd[0]}; \t Female: {xd[1]};");
         }
         static double AverageAge(List<Person> persons)
         {
@@ -124,6 +139,40 @@ namespace Employee
             bool moreYoung = false;
             if (i > 1) moreYoung = true;
             return moreYoung;
+        }
+
+        static int YearlyHuf(Person person)
+        {
+            return (person.Salary * 12) * 388;
+        }
+
+        static Dictionary<string,int> Over12Million(List<Person> persons, List<int> yearlyHufSalary)
+        {
+            Dictionary<string, int> keyValuePairs = new Dictionary<string, int>();
+
+            int i = 0;
+            foreach (var person in persons)
+            {
+                if (yearlyHufSalary[i] > 12000000) 
+                {
+                    keyValuePairs.Add(person.Name, yearlyHufSalary[i]);
+                }
+                i++;
+            }
+
+            return keyValuePairs;
+        }
+
+        static double AverageSalary(List<Person> persons)
+        {
+            double average = persons.Average(p => p.Salary);
+            return average;
+        }
+
+        static double[] AverageGenderSalary(List<Person> persons)
+        {
+            double[] average = { persons.Where(p => p.Gender).Average(p => p.Salary), persons.Where(p => p.Gender == false).Average(p => p.Salary) };
+            return average;
         }
     }
 }

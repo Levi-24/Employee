@@ -32,6 +32,18 @@ namespace Employee
             this.Salary = int.Parse(Pieces[7]);
         }
 
+        public Person (Person person)
+        {
+            this.Name = person.Name;
+            this.Age = person.Age;
+            this.City = person.City;
+            this.Department = person.Department;
+            this.Position = person.Position;
+            this.Gender = person.Gender;
+            this.MaritalStatus = person.MaritalStatus;
+            this.Salary = person.Salary;
+        }
+
         public virtual void Print(int i, List<Person> persons)
         {
             Console.Write($"{persons[i].Name}; ");
